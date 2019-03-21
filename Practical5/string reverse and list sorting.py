@@ -15,8 +15,10 @@ print(s)
 
 
 s=input()
-s=s[::1]
+s=s[::-1]
 print(sorted(s.split()).reverse())
+
+
 
 
 
