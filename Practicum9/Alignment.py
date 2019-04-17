@@ -1,0 +1,38 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Wed Apr 17 09:38:01 2019
+
+@author: Jessi
+"""
+import xlrd
+BLOSUM62_matrix=xlrd.open_workbook('BLOSUM62matrix.xlsx')
+sheet=BLOSUM62_matrix.sheet_by_name('Sheet1')
+seq1="MLSRAVCGTSRQLAPVLAYLGSRQKHSLPDLPYDYGALEPHINAQIMQLHHSKHHAAYVNNLNVTEEKYQEALAKGDVTAQIALQPALKFNGGGHINHSIFWTNLSPNGGGEPKGELLEAIKRDFGSFDKFKEKLTAASVGVQGSGWGWLGFNKERGHLQIAACPNQDPLQGTTGLIPLLGIDVWEHAYYLQYKNVRPDYLKAIWNVINWENVTERYMACKK"
+seq2="MLCRAACSTGRRLGPVAGAAGSRHKHSLPDLPYDYGALEPHINAQIMQLHHSKHHAAYVNNLNATEEKYHEALAKGDVTTQVALQPALKFNGGGHINHTIFWTNLSPKGGGEPKGELLEAIKRDFGSFEKFKEKLTAVSVGVQGSGWGWLGFNKEQGRLQIAACSNQDPLQGTTGLIPLLGIDVWEHAYYLQYKNVRPDYLKAIWNVINWENVTERYTACKK"
+seq3="WNGFSEWWTHEVDYNQKLTIENNQRPKIHEHEQWGLRQSPPPPKLCCPTCQMCERMRHQNRFAPLMEVGCRCMCWFHDWWVISVGTWLHTVIMYMMWPKRFHHNECPKACFRTTYTRKNHHALYWMLFEMCCYDQDVVWSKTHIFTTVRDIEVYVEQVFFIWGPLCHVAIACYEPVKTIRRRIPMYLCRHCIRGDNSYLLACCSIIYYFYHHMSYYGVLDIL" 
+def compare(seqa,seqb): 
+    edit_distance=0 #set the initial distance =0
+    Mydict={'A':0,'R':1,'N':2,'D':3,'C':4,'Q':5,'E':6,'G':7,'H':8,'I':9,'L':10,'K':11,'M':12,'F':13,'P':14,'S':15,'T':16,'W':17,'Y':18,'V':19}
+    score=0
+    for i in range(len(seqa)):
+        row=Mydict[seqa[i]]
+        cols=Mydict[seqb[i]]
+        score+=sheet.cell(row,cols).value 
+        if seqa[i]!=seqb[i]:
+            edit_distance+=1 #add a score 1 if amino acids are different 
+    print(score)
+    print(edit_distance)    
+compare(seq1,seq2)
+compare(seq2,seq3)
+compare(seq1,seq3)
+
+
+
+
+
+
+           
+        
+    
+           
+           

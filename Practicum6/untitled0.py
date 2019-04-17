@@ -1,10 +1,10 @@
-
 # -*- coding: utf-8 -*-
 """
-Created on Wed Mar 27 15:31:21 2019
+Created on Sun Mar 31 22:00:58 2019
 
 @author: Jessi
 """
+
 #先用空格把每一行都分开，再把用一个list储存每一行并以逗号split开"""
 import re
 input=open('address_information.csv','r')
@@ -40,44 +40,24 @@ from email.header import Header
 # 第三方 SMTP 服务
 server = smtplib.SMTP('smtp.zju.edu.cn',25) 
 mail_host="smtp.zju.edu.cn"  #设置服务器
-mail_user="3180111435"    # 用户名
-mail_pass="abc123456" #口令
-sender = '3180111435@zju.edu.cn' 
+mail_user="3180111435"    #用户名
+mail_pass="abc123456"   #口令 
+sender = 'from@zju.edu.cn'
 filex=open('body.txt','r')
 txt=filex.read()
-name=['Anna','Mary','Emma']
-i=0
-for item in emails:
-    receivers = item  # 接收邮件，可设置为你的QQ邮箱或者其他邮箱
-    c=name[i]
-    i=i+1        
-    result=re.sub('user',c,txt)
-    message = MIMEText( result, 'plain', 'utf-8')
-    message['From'] = Header("3180111435", 'utf-8')
-    message['To'] =  Header(result, 'utf-8')
-    subject = "To" + str(c) + "Your analysis job has been finished!"
-    message['Subject'] = Header(subject, 'utf-8')
+receiver="760549092@qq.com" # 接收邮件，可设置为你的QQ邮箱或者其他邮箱   
+result=re.sub('user',"Jessie",txt)
+message = MIMEText( result, 'plain', 'utf-8')
+message['From'] = Header("3180111435", 'utf-8')
+message['To'] =  Header(result, 'utf-8')
+subject = "To Jessie" + "Your analysis job has been finished!"
+message['Subject'] = Header(subject, 'utf-8')
   
-    try:
-        smtpObj = smtplib.SMTP() 
-        smtpObj.connect(mail_host, 25)    # 25 为 SMTP 端口号
-        smtpObj.login("3180111435","Zhao5210")  
-        smtpObj.sendmail(sender, receivers, message.as_string())
-        print ("Mail sent successfully")
-    except smtplib.SMTPException:
-        print ("Error: Fail delivery")
-    #try要在循环的内部
-        
-        
-        
-        
-    
-    
-       
-    
-    
-   
-
-      
-      
-      
+try:
+    smtpObj = smtplib.SMTP() 
+    smtpObj.connect(mail_host, 25)    # 25 为 SMTP 端口号
+    smtpObj.login("3180111435","Zhao5210")  
+    smtpObj.sendmail(sender, receiver, message.as_string())
+    print ("Mail sent successfully")
+except smtplib.SMTPException:
+    print ("Error: Fail delivery")
