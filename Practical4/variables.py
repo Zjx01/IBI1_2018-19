@@ -27,6 +27,7 @@ Z=(X and not Y) or (Y and not X)
 print(Z)
 W=(X!=Y)
 print(W)
+print(W=Z)
 
 
 

@@ -20,9 +20,13 @@ while p==False:
     for i in range(2,u+1):
         if n%i == 0:
             p=False
+        else:
+            p=True
 #n doet not have common factor except 1 and itslef          
 
 
      
 print(n)
-            
+
+
+

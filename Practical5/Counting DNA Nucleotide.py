@@ -11,10 +11,13 @@ myDict={}
 for word in s:
         if word in myDict:
             myDict[word] +=1
+            #operator +=:   x+=5 -> x=x+5
         else:
             myDict[word]=1
 print(myDict)
 import matplotlib.pyplot as plt
+#frequency= tuple(myDict.values) the percentage will be calculated later in the autopct='%1.1f%%'
+#
 labels=['A','C','G','T']
 size=myDict.values()
 explode=(0,0.1,0,0)
