@@ -4,8 +4,7 @@ Created on Sat Mar 16 17:08:11 2019
 
 @author: Jessi
 """
-#"n should be an integer"
-n=2019
+n=eval(input("input a integer:",))
 n0=n
 sign=0 #to store whether the number input is an odd or even
 answer=str(n) + "="

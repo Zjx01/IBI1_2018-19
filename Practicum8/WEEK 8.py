@@ -16,32 +16,35 @@ terms=root.getElementsByTagName("term")
 """
 to find out the element term with autophagosom first
 """
-
 for term in terms:
-    definition=term.getElementsByTagName('defstr')[0].childnodes[0]
+    definition=term.getElementsByTagName('defstr')[0].childNodes[0].data
+    print(type(definition))
+    definitionl=[]
+    idl=[]
+    namel=[]
+"""the three lists are created to store the information of id, definition and name respectively"""
     if re.findall(r'autophagosome',definition):
-        id=term.getElementByTagName('id')[0].childnodes[0]
-        name=term.getElementByTagName('type')[0].childnode[0]
-    print(definition)
-    print(id)
-    print(name)
+        #to make sure autophagosome is contained in the <defstr> of term 
+         id=term.getElementByTagName('id')[0].childNodes[0].data
+         name=term.getElementByTagName('name')[0].childNodes[0].data
+    definitionl.append(definition)
+    idl.append(id)
+    namel.append(name)
 def childnode(is_a):
-    for term in terms:
-        
-        
-    
-    
-    
-    
-    
-    
-    
-
-        
-
-
+    count=0
+    nodelist=terms.getElementByTag("is_a")
+    for nodes in nodelist:
+        nodes.getChildNode("is_a")
+        count+=len(nodes)
+    count=count+len(nodelist)
+childnode(terms)
+df=pd.Datafrma(namel,columns=[name])
+df=pd.Dataframe(idl,columns=[id])
+df=pd.Dataframe(definitionl,columns=[definition])
 
 """
+abandoned method
+---------------------------------
 content="<defstr>(.*?)</defstr>"
 for a in term:
     id=[]
@@ -60,8 +63,6 @@ for a in term:
     print(name)
     print(id)
     print(definition)
-"""
-#---------main script-------------
 #collectchildrenGoIDSER(GOID,resultSet)
 def children_id(GOID):
     count=0
@@ -69,7 +70,7 @@ def children_id(GOID):
     for e in res:
         count=count+1
         for element in res:
-             
+"""
             
             
     
