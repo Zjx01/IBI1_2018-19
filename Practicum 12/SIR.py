@@ -62,7 +62,7 @@ plt.plot(X,susceptibleN)
 plt.plot(X,infectiousN)
 plt.plot(X,recoverN)
 plt.legend(["susceptible","infected","recover"],loc='upper right')  
-plt.savefig ("markflow" ,type="png")
+plt.savefig ("markflow1" ,type="png")
 plt.show()
 
 """
