@@ -4,43 +4,43 @@ Created on Wed Apr 10 09:06:38 2019
 
 @author: Jessi
 """
-
-from xml.dom.minidom import parse  
-import xml.dom.minidom 
-import pandas as pd
+import xml.dom.minidom
 import re
+import pandas as pd
+
+filePath=r'C:/Users/Jessi/OneDrive/桌面/IBI/IBI1_2018-19/Practicum8'#Your file path
+fileName='autophagosome.xlsx'
+excel=filePath+'/'+fileName
+re_store = re.compile(r'autophagosome')
+#Function to find childnodes 
+def Child(id, result):
+    for term in terms:
+        parents = term.getElementsByTagName('is_a')
+        kid= term.getElementsByTagName('id')[0].childNodes[0].data
+        for parent in parents:
+            if parent.childNodes[0].data == id:
+                result.add(kid)
+                Child(kid, result)
+                
+#create a pandas.Dataframe to store the output
+df = pd.DataFrame(columns=['id','name','definition','childnodes'])
+
+#create the DOM tree    
 DOMTree = xml.dom.minidom.parse("go_obo.xml")
-root=DOMTree.documentElement
-print(root)
-terms=root.getElementsByTagName("term")
-"""
-to find out the element term with autophagosom first
-"""
+obo = DOMTree.documentElement
+terms = obo.getElementsByTagName('term') #get the nodelist of element term
 for term in terms:
-    definition=term.getElementsByTagName('defstr')[0].childNodes[0].data
-    print(type(definition))
-    definitionl=[]
-    idl=[]
-    namel=[]
-"""the three lists are created to store the information of id, definition and name respectively"""
-    if re.findall(r'autophagosome',definition):
-        #to make sure autophagosome is contained in the <defstr> of term 
-         id=term.getElementByTagName('id')[0].childNodes[0].data
-         name=term.getElementByTagName('name')[0].childNodes[0].data
-    definitionl.append(definition)
-    idl.append(id)
-    namel.append(name)
-def childnode(is_a):
-    count=0
-    nodelist=terms.getElementByTag("is_a")
-    for nodes in nodelist:
-        nodes.getChildNode("is_a")
-        count+=len(nodes)
-    count=count+len(nodelist)
-childnode(terms)
-df=pd.Datafrma(namel,columns=[name])
-df=pd.Dataframe(idl,columns=[id])
-df=pd.Dataframe(definitionl,columns=[definition])
+    defstr = term.getElementsByTagName('defstr')[0].childNodes[0].data
+    #find terms that contain the word 'autophagosome'
+    if re_store.search(defstr):
+        id = term.getElementsByTagName('id')[0].childNodes[0].data
+        name = term.getElementsByTagName('name')[0].childNodes[0].data
+        result = set()#to avoid the repetitiness of the element we get
+        Child(id, result)
+        df = df.append(pd.DataFrame({'id':[id],'name':[name],'definition':[defstr],'childnodes':[len(result)]})) 
+        print(id, len(result))
+#save to excel
+df.to_excel(excel,index=False)
 
 """
 abandoned method

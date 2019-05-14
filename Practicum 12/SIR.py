@@ -28,7 +28,7 @@ these initial numbers should be out of the loop or it will goes into the loop ev
 """
 #A,B,C are used to store the length of list of infectious and recovered people
 for i in range(0,1000):
-    a=np.random.choice(range(2),len(S),p=[β*len(S)/N,1-β*len(S)/N])
+    a=np.random.choice(range(2),len(S),p=[β*len(I)/N,1-β*len(I)/N])
     #susceptible individuals have chances to get disease and recover
     for j in a:
         if j==0:

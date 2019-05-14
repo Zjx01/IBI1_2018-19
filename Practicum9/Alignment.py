@@ -12,6 +12,7 @@ seq2="MLCRAACSTGRRLGPVAGAAGSRHKHSLPDLPYDYGALEPHINAQIMQLHHSKHHAAYVNNLNATEEKYHEALA
 seq3="WNGFSEWWTHEVDYNQKLTIENNQRPKIHEHEQWGLRQSPPPPKLCCPTCQMCERMRHQNRFAPLMEVGCRCMCWFHDWWVISVGTWLHTVIMYMMWPKRFHHNECPKACFRTTYTRKNHHALYWMLFEMCCYDQDVVWSKTHIFTTVRDIEVYVEQVFFIWGPLCHVAIACYEPVKTIRRRIPMYLCRHCIRGDNSYLLACCSIIYYFYHHMSYYGVLDIL" 
 
 """
+description---------------------------------------------------------------
 define a function to get the difference from each sequence, and score is counted for every amino acid in the sequence
 row and cols are write to get the value from BLOSUM62 chart
 and the sheet is used to find the value in cell to get the final value
