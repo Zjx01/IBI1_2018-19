@@ -7,9 +7,9 @@ Created on Wed Apr 17 09:38:01 2019
 import xlrd
 BLOSUM62_matrix=xlrd.open_workbook('BLOSUM62matrix.xlsx')
 sheet=BLOSUM62_matrix.sheet_by_name('Sheet1')
-seq1="MLSRAVCGTSRQLAPVLAYLGSRQKHSLPDLPYDYGALEPHINAQIMQLHHSKHHAAYVNNLNVTEEKYQEALAKGDVTAQIALQPALKFNGGGHINHSIFWTNLSPNGGGEPKGELLEAIKRDFGSFDKFKEKLTAASVGVQGSGWGWLGFNKERGHLQIAACPNQDPLQGTTGLIPLLGIDVWEHAYYLQYKNVRPDYLKAIWNVINWENVTERYMACKK"
-seq2="MLCRAACSTGRRLGPVAGAAGSRHKHSLPDLPYDYGALEPHINAQIMQLHHSKHHAAYVNNLNATEEKYHEALAKGDVTTQVALQPALKFNGGGHINHTIFWTNLSPKGGGEPKGELLEAIKRDFGSFEKFKEKLTAVSVGVQGSGWGWLGFNKEQGRLQIAACSNQDPLQGTTGLIPLLGIDVWEHAYYLQYKNVRPDYLKAIWNVINWENVTERYTACKK"
-seq3="WNGFSEWWTHEVDYNQKLTIENNQRPKIHEHEQWGLRQSPPPPKLCCPTCQMCERMRHQNRFAPLMEVGCRCMCWFHDWWVISVGTWLHTVIMYMMWPKRFHHNECPKACFRTTYTRKNHHALYWMLFEMCCYDQDVVWSKTHIFTTVRDIEVYVEQVFFIWGPLCHVAIACYEPVKTIRRRIPMYLCRHCIRGDNSYLLACCSIIYYFYHHMSYYGVLDIL" 
+humanseq="MLSRAVCGTSRQLAPVLAYLGSRQKHSLPDLPYDYGALEPHINAQIMQLHHSKHHAAYVNNLNVTEEKYQEALAKGDVTAQIALQPALKFNGGGHINHSIFWTNLSPNGGGEPKGELLEAIKRDFGSFDKFKEKLTAASVGVQGSGWGWLGFNKERGHLQIAACPNQDPLQGTTGLIPLLGIDVWEHAYYLQYKNVRPDYLKAIWNVINWENVTERYMACKK"
+miceseq="MLCRAACSTGRRLGPVAGAAGSRHKHSLPDLPYDYGALEPHINAQIMQLHHSKHHAAYVNNLNATEEKYHEALAKGDVTTQVALQPALKFNGGGHINHTIFWTNLSPKGGGEPKGELLEAIKRDFGSFEKFKEKLTAVSVGVQGSGWGWLGFNKEQGRLQIAACSNQDPLQGTTGLIPLLGIDVWEHAYYLQYKNVRPDYLKAIWNVINWENVTERYTACKK"
+randomseq="WNGFSEWWTHEVDYNQKLTIENNQRPKIHEHEQWGLRQSPPPPKLCCPTCQMCERMRHQNRFAPLMEVGCRCMCWFHDWWVISVGTWLHTVIMYMMWPKRFHHNECPKACFRTTYTRKNHHALYWMLFEMCCYDQDVVWSKTHIFTTVRDIEVYVEQVFFIWGPLCHVAIACYEPVKTIRRRIPMYLCRHCIRGDNSYLLACCSIIYYFYHHMSYYGVLDIL" 
 
 """
 description---------------------------------------------------------------
@@ -26,23 +26,23 @@ def compare(seqa,seqb):
     alignment=""
     for i in range(len(seqa)):
         row=Mydict[seqa[i]]
-        cols=Mydict[seqb[i]]
+        cols=Mydict[seqb[i]]#to get the location of the amino acid in the sequence
         score+=sheet.cell(row,cols).value 
         if seqa[i]!=seqb[i]:
             edit_distance+=1
         #add a score 1 if amino acids are different 
-            if sheet.cell(row,cols).value>=0:
+            if sheet.cell(row,cols).value>=0:#get the value from the excel according to its location
                alignment=alignment+"+"
             if sheet.cell(row,cols).value<0:
                 alignment=alignment+"_"
         else:
-            alignment=alignment+seqa[i]
-    print("edit_distance between "+seqa+"and"+seqb, edit_distance)
-    print("score")
+            alignment=alignment+seqa[i]#if amino acid is the same
+    print("edit_distance between "+seqa+ "&" +seqb, edit_distance)
+    print("score=",score)
     print(alignment)
-compare(seq1,seq2)
-compare(seq2,seq3)
-compare(seq1,seq3)
+compare(humanseq,miceseq)#compare the differences between each sequence use the function compare
+compare(miceseq,randomseq)
+compare(humanseq,randomseq)
 
 """
 Bonus project:

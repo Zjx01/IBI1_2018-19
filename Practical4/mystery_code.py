@@ -1,5 +1,5 @@
 # What does this piece of code do?
-# Answer:this code is used to find prime numbers 
+# Answer:this code is used to find prime numbers between 1 and 100
 
 # Import libraries
 # randint allows drawing a random number, 
@@ -15,17 +15,13 @@ p=False
 while p==False:
     p=True
     n = randint(1,100)
-    u = ceil(n**(0.5))
-#to make u a integer
-    for i in range(2,u+1):
+    u = ceil(n**(0.5))#why we use it because a=b*c,n b and c must be located on the left and right side of the a*(0.5). so once we verify the one side we can know other side
+#to make u a integer 
+    for i in range(2,u+1):#to contain u in side of the range eg.25=5*5
         if n%i == 0:
             p=False
-        else:
-            p=True
+        
 #n doet not have common factor except 1 and itslef          
-
-
-     
 print(n)
 
 

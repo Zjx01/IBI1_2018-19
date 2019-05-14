@@ -18,7 +18,7 @@ from matplotlib import cm
 B=[]
 BB=[]
 #the number of susceptible population vary acoording to the vaccinationrate 
-#A,B,C are used to store the length of infectious and recovered people
+#B is used to store the number of infectious people 
 N=10000#sum of the population involved
 for v in range(0,110,10):
     vaccinatedpopulation=v*N/100
