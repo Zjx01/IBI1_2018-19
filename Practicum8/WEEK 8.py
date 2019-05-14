@@ -8,18 +8,18 @@ import xml.dom.minidom
 import re
 import pandas as pd
 
-filePath=r'C:/Users/Jessi/OneDrive/桌面/IBI/IBI1_2018-19/Practicum8'#Your file path
+filePath=r'C:/Users/Jessi/OneDrive/桌面/IBI/IBI1_2018-19/Practicum8'#file path
 fileName='autophagosome.xlsx'
 excel=filePath+'/'+fileName
 re_store = re.compile(r'autophagosome')
 #Function to find childnodes 
-def Child(id, result):
+def Child(id, result):#the defined function use to find the 'is_a' tag 
     for term in terms:
-        parents = term.getElementsByTagName('is_a')
+        parents = term.getElementsByTagName('is_a')#nodelist of all is_a in the file
         kid= term.getElementsByTagName('id')[0].childNodes[0].data
         for parent in parents:
-            if parent.childNodes[0].data == id:
-                result.add(kid)
+            if parent.childNodes[0].data == id: #to get the is_a which contain the id number
+                result.add(kid)#add the id into the set, why set use here is that the parent can also be kid of another element. so set is used to avoid the repitition
                 Child(kid, result)
                 
 #create a pandas.Dataframe to store the output
@@ -35,7 +35,7 @@ for term in terms:
     if re_store.search(defstr):
         id = term.getElementsByTagName('id')[0].childNodes[0].data
         name = term.getElementsByTagName('name')[0].childNodes[0].data
-        result = set()#to avoid the repetitiness of the element we get
+        result = set()
         Child(id, result)
         df = df.append(pd.DataFrame({'id':[id],'name':[name],'definition':[defstr],'childnodes':[len(result)]})) 
         print(id, len(result))
