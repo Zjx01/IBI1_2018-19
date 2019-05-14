@@ -27,7 +27,6 @@ while n != 0:#the garantee of the function
 
 if sign == 1:
     answer = answer + "+2**0"    
-    
 print(answer) 
         
             
