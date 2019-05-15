@@ -1,17 +1,19 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Wed May 15 03:23:00 2019
+Created on Wed May 15 09:16:39 2019
 
-@author: melanie
+@author: Jessi
 """
 
+import os
+import numpy
+os.chdir('C:/temp') 
 def xml_to_cps():
     import os
     import xml.dom.minidom
     
-    # first, convert xml to cps 
-    os.system("CopasiSE.exe -i predator-prey.xml -s predator-prey.cps")
+    # first, convert xml to cps   
+    os.system("C:/Program Files/copasi.org/COPASI 4.25.207/bin/CopasiSE -i predator-prey.xml -s predator-prey.cps")
     
     # now comes the painful part. Just copy and paste this ok
     
@@ -53,6 +55,9 @@ def xml_to_cps():
     cpsFile = open("predator-prey.cps","w")
     cpsTree.writexml(cpsFile)
     cpsFile.close()
-    
-        
-        
+xml_to_cps()
+names=np.array()
+results = numpy. array ( results )
+results = results . astype (numpy. float )
+
+

@@ -17,8 +17,9 @@ for i in b:
     if i in range(1,24):
         i==i
     else:
-        b.remove(i)
-print("the list of number(from 1 to 23) put in",b) 
+        break
+print("the number should range from 1 to 24") 
+"""
 import itertools
 c=b[:] 
 recursion=0
@@ -36,7 +37,7 @@ def function(c):#change the function
     #we need to pay attention to the a=0
         for i in range(len(d)):
             c.append(d[i])
-        if len(c)==1:
+        if len(c)==1:hen there is only one number left, use a large loop to determine if the last value is equal to 24
            print(c[0]==24)
            recursion+=1
     function(c)
@@ -44,7 +45,6 @@ function(c)
 
 print('recursion=',recursion)
 
-            #当只剩下一个数字的时候，再使用一个大循环，来判断最后的那个值是否=24
 
     
     
