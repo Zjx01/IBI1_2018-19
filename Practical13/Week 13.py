@@ -6,14 +6,14 @@ Created on Wed May 15 09:16:39 2019
 """
 
 import os
-import numpy
-os.chdir('C:/temp') 
+import numpy as np
+os.chdir('C:/Users/Jessi/OneDrive/桌面/IBI/IBI1_2018-19/Practical13') 
 def xml_to_cps():
     import os
     import xml.dom.minidom
     
     # first, convert xml to cps   
-    os.system("C:/Program Files/copasi.org/COPASI 4.25.207/bin/CopasiSE -i predator-prey.xml -s predator-prey.cps")
+    os.system("CopasiSE.exe -i predator-prey.xml -s predator-prey.cps")
     
     # now comes the painful part. Just copy and paste this ok
     
@@ -29,6 +29,7 @@ def xml_to_cps():
             task.setAttribute("scheduled","true")
             task.insertBefore(reportLine,task.childNodes[0])
             break
+        
         
     
     for taskDetails in task.childNodes:
@@ -55,9 +56,62 @@ def xml_to_cps():
     cpsFile = open("predator-prey.cps","w")
     cpsTree.writexml(cpsFile)
     cpsFile.close()
-xml_to_cps()
-names=np.array()
-results = numpy. array ( results )
-results = results . astype (numpy. float )
+#xml_to_cps()
+import csv
+csv_file = open('modelResults.csv', 'r') 
+csv_reader_lines = csv.reader(csv_file) 
+datelist=[]
+day=[]
+for one_line in csv_reader_lines:
+    day.append(one_line)
+    print(day)
+datelist.append(day)
+results = np.array (datelist)
+Results = results.astype (np. float)
+print(Results)
+import matplotlib . pyplot as plt
+#names=np.array('time','A','B')
+time=[]
+A=[]
+B=[]
+for i in datelist:# i is the list contain time, population of predator and prey at a time
+    for j in i:
+        time.append(float(j[0]))
+        A.append(float(j[1]))
+        B.append(float(j[2]))
+    plt.figure(figsize=(6,4),dpi=150)
+X=time
+plt.xlabel("time course", fontsize=14)
+plt.ylabel("population size",fontsize=14)
+plt.plot(A,label='predator(b=0.02.d=0.4)')
+plt.plot(B,label='prey(b=0.1,d=0.02)')
+plt.legend(loc='upper right')
+for i in datelist:# i is the list contain time, population of predator and prey at a time
+    for j in i:
+        time.append(float(j[0]))
+        A.append(float(j[1]))
+        B.append(float(j[2]))
+    plt.figure(figsize=(6,4),dpi=150)
+plt.xlabel("predator(b=0.02.d=0.4)")
+plt.ylabel("prey(b=0.1,d=0.02)")
+plt.plot(A,B)
+
+import xml.dom.minidom
+import re
+DOMTree = xml.dom.minidom.parse("predator-prey.xml")
+# four parameter: k predator breeds, k predator dies, k prey breeds, k prey dies
+major=DOMTree.documentElement
+parameter=
+
+
+
+
+
+
+
+
+
+
+
 
 
