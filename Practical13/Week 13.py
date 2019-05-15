@@ -81,7 +81,7 @@ for i in datelist:# i is the list contain time, population of predator and prey 
         B.append(float(j[2]))
     plt.figure(figsize=(6,4),dpi=150)
 X=time
-plt.xlabel("time course", fontsize=14)
+plt.xlabel("time", fontsize=14)
 plt.ylabel("population size",fontsize=14)
 plt.plot(A,label='predator(b=0.02.d=0.4)')
 plt.plot(B,label='prey(b=0.1,d=0.02)')
@@ -94,14 +94,31 @@ for i in datelist:# i is the list contain time, population of predator and prey 
     plt.figure(figsize=(6,4),dpi=150)
 plt.xlabel("predator(b=0.02.d=0.4)")
 plt.ylabel("prey(b=0.1,d=0.02)")
+plt.title("time course")
 plt.plot(A,B)
+plt.title("cycle limit")
 
 import xml.dom.minidom
 import re
 DOMTree = xml.dom.minidom.parse("predator-prey.xml")
 # four parameter: k predator breeds, k predator dies, k prey breeds, k prey dies
 major=DOMTree.documentElement
-parameter=
+parameters=major.getElementsByTagName('Parameter')#nodelist
+import random
+for parameter in parameters:
+    parameter.getAttribute('value')#get the attribute value
+    i=random.random()#create a float range in (0,1)
+    parameter.setAttribute('value',i)
+"""
+parameter.getAttribute('value')
+Out[42]: ''
+--------------------------
+plot the diagram
+can write a for loop to run 100 times
+use numpy.random.sample() to generate the 
+
+
+
 
 
 
