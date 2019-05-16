@@ -31,7 +31,7 @@ def dfs(n):
         else:
             return 0
     #select two different numbers
-    for i in range(0,n):
+    for i in range(0,n):#select the re
         for j in range(i+1,n):#eg.when i=0
             a = bl[i]#a store the first element 
             b = bl[j]#from the rest, eg.b store the second element

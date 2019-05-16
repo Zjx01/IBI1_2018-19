@@ -8,16 +8,12 @@
 
 
 ## Feedback:
+The content can not be found according to the account you submitted, so I can not give guidance on your github portfolio.
 
 
+This assessment is formative and does not form part of your final grade. 
 
-
-
-
-
-This asssesment is formative and does not form part of your final grade. 
-
-If this was a summative assessment, you would have scored 
+If this was a summative assessment, you would have scored 0 out of 100
 
 
 
