@@ -13,7 +13,7 @@ for word in DNA_sequence:
         my_dic[word]=1
 print(my_dic)#if the word is in the dictionary, the value+1, else import the way into the dictionary add the key and its value=1
 import matplotlib.pyplot as plt
-labels=list(my_dic.keys())#the label varys accord to the sequence you input
+labels=list(my_dic.keys())#the label varys according to the sequence you input
 size=my_dic.values()
 plt.pie(size,labels=labels,autopct='%1.1f%%')
 plt.show()
