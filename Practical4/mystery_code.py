@@ -10,19 +10,21 @@ from random import randint
 # ceil takes the ceiling of a number, i.e. the next higher integer.
 # e.g. ceil(4.2)=5
 from math import ceil
-
-p=False
+p=0
+while p==0:
+    p=1
+p=False#the value of is False
 while p==False:
-    p=True
+    p=True#p is True
     n = randint(1,100)
     u = ceil(n**(0.5))#why we use it because a=b*c,n b and c must be located on the left and right side of the a*(0.5). so once we verify the one side we can know other side
 #to make u a integer 
     for i in range(2,u+1):#to contain u in side of the range eg.25=5*5
-        if n%i == 0:
+        if n%i == 0:#n doet not have common factor except 1 and itslef, so p is always false
+            p=0#print(p==0) False
             p=False
-        
-#n doet not have common factor except 1 and itslef, so p is always false, so the loop continues         
-print(n)
+                
+print(n) #output the prime number
 
 
 
