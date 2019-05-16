@@ -99,26 +99,46 @@ plt.plot(A,B)
 plt.title("cycle limit")
 
 import xml.dom.minidom
-import re
-DOMTree = xml.dom.minidom.parse("predator-prey.xml")
+DOMTree = xml.dom.minidom.parse("predator-prey-copy.xml")
 # four parameter: k predator breeds, k predator dies, k prey breeds, k prey dies
 major=DOMTree.documentElement
-parameters=major.getElementsByTagName('Parameter')#nodelist
+parameters=major.getElementsByTagName('Parameter')#nodelist of parameter
 import random
 for parameter in parameters:
     parameter.getAttribute('value')#get the attribute value
-    i=random.random()#create a float range in (0,1)
-    parameter.setAttribute('value',i)
-"""
-parameter.getAttribute('value')
-Out[42]: ''
+   #create a float range in (0,1) for value
+    parameter.setAttribute('value',random.random())
+    """
+copy=open('predator-prey-copy.xml','w')#there is still some problem with write xml part which needs to be changed
+DOMTree.writexml(copy)
+copy.close()
+xml_to_cps()
+#to store the differences made to the copy
+os.system("CopasiSE.exe predator-prey-copy.cps")#change it to the cps
+import csv
+csv_file = open('modelResults.csv', 'r') 
+csv_reader_lines = csv.reader(csv_file) 
+results = []
+import numpy
+for one_line in csv_reader_lines:
+    results.append(one_line)
+results_number=results[1:,1:3]
+results_number=results_number.astype(numpy.float)
+plt.plot(results_number[0:,0],label="prey")
+plt.plot(results_number[0:,1],label="predator")
+plt.xlabel('time')
+plt.ylabel('population size')
+plt.title('time course')
+plt.legend()
+ 
+
+what plan to do later  
 --------------------------
 change the xml file into the cps
-and run the program again and
-plot the diagram
-can write a for loop to run 100 times
-use numpy.random.sample() to generate the 
-
+plot the diagram 
+on the basis of the first plot 
+later can define a function, use global count to run 100 times, each time count=count+1,run the simulation
+"""
 
 
 
