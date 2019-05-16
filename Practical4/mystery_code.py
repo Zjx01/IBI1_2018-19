@@ -21,7 +21,7 @@ while p==False:
         if n%i == 0:
             p=False
         
-#n doet not have common factor except 1 and itslef          
+#n doet not have common factor except 1 and itslef, so p is always false, so the loop continues         
 print(n)
 
 

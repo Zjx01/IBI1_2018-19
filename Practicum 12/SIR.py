@@ -65,6 +65,22 @@ plt.legend(["susceptible","infected","recover"],loc='upper right')
 plt.savefig ("markflow1" ,type="png")
 plt.show()
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 """
 abandoned code
 ---------------
