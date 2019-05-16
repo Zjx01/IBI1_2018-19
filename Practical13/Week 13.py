@@ -113,6 +113,8 @@ for parameter in parameters:
 parameter.getAttribute('value')
 Out[42]: ''
 --------------------------
+change the xml file into the cps
+and run the program again and
 plot the diagram
 can write a for loop to run 100 times
 use numpy.random.sample() to generate the 

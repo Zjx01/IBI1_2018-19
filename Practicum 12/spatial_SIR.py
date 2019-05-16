@@ -33,8 +33,7 @@ for i in range(100):#the time course is 100 days
                             population[xNeighbour,yNeighbour]=np.random.choice(range(2),1,p=[1-β,β])[0] 
        if population[x,y]==1:#the infected people stay ill or recover
           population[x,y]=np.random.choice([1,2],1,p=[1-γ,γ])[0]#np.random.choice put out a list     
-color=['g','b','r']
-Label=['susceptible','infected','recover']
+#Label=['susceptible','infected','recover']
 plt . figure ( figsize =(6 ,4) , dpi=150) 
 plt . imshow( population , cmap='viridis',interpolation='nearest' )   
         
