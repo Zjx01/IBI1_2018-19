@@ -56,7 +56,7 @@ def xml_to_cps():
     cpsFile = open("predator-prey.cps","w")
     cpsTree.writexml(cpsFile)
     cpsFile.close()
-#xml_to_cps()
+#--------------------------------------------------------------------------------
 import csv
 csv_file = open('modelResults.csv', 'r') 
 csv_reader_lines = csv.reader(csv_file) 
@@ -64,11 +64,11 @@ datelist=[]
 day=[]
 for one_line in csv_reader_lines:
     day.append(one_line)
-    print(day)
+    #print(day)
 datelist.append(day)
 results = np.array (datelist)
 Results = results.astype (np. float)
-print(Results)
+#print(Results)
 import matplotlib . pyplot as plt
 #names=np.array('time','A','B')
 time=[]
@@ -98,23 +98,66 @@ plt.title("time course")
 plt.plot(A,B)
 plt.title("cycle limit")
 
+#-------------------------------------------------------------
+#question exists here
+"""
 import xml.dom.minidom
-DOMTree = xml.dom.minidom.parse("predator-prey-copy.xml")
+DOMTree=xml.dom.minidom.parse('predator-prey.xml')
+collection=DOMTree.documentElement
+parameters=collection.getElementsByTagName('parameter')
+#find and change parameters
+for parameter in parameters:
+    if parameter.getAttribute('id')=='k_predator_breeds':
+       parameter.setAttribute('value','0.5')
+    if parameter.getAttribute('id')=='k_predator_dies':
+       parameter.setAttribute('value','0.4')
+    if parameter.getAttribute('id')=='k_prey_breeds':
+       parameter.setAttribute('value','0.8')
+    if parameter.getAttribute('id')=='k_prey_dies':
+       parameter.setAttribute('value','0.6')
+#rewrite xml
+f=open('predator-prey.xml','w')
+DOMTree.writexml(f)
+xml_to_cps()#change to cps
+
+csv_file = open('modelResults.csv', 'r')
+for one_line in csv_reader_lines:
+    day.append(one_line)
+    print(day)
+datelist.append(day)
+results = np.array (datelist)
+Results = results.astype (np. float) 
+plt.plot( Results[0,:],Results[1,:],label='Predator(b=0.5,d=0.4)')
+plt.plot(Results[0,:],Results[2,:],label='Prey(b=0.8,d=0.6)')
+plt.legend()
+plt.xlabel('time')
+plt.ylabel('population size')
+plt.title('Time course')
+plt.show()
+#limit cycle visualization
+plt.figure(figsize =(6,4),dpi=150)
+plt.plot(Results[1,:],Results[2,:])
+plt.xlabel('predator population')
+plt.ylabel('prey population')
+plt.title('Limit cycle')
+plt.show()
+#--------------------------------------------------
+import xml.dom.minidom
+DOMTree = xml.dom.minidom.parse("predator-prey.xml")
 # four parameter: k predator breeds, k predator dies, k prey breeds, k prey dies
 major=DOMTree.documentElement
-parameters=major.getElementsByTagName('Parameter')#nodelist of parameter
+parameters=major.getElementsByTagName('parameter')#nodelist of parameter
 import random
 for parameter in parameters:
     parameter.getAttribute('value')#get the attribute value
    #create a float range in (0,1) for value
     parameter.setAttribute('value',random.random())
-    """
-copy=open('predator-prey-copy.xml','w')#there is still some problem with write xml part which needs to be changed
+copy=open('predator-prey.xml','w')#there is still some problem with write xml part which needs to be changed
 DOMTree.writexml(copy)
 copy.close()
 xml_to_cps()
 #to store the differences made to the copy
-os.system("CopasiSE.exe predator-prey-copy.cps")#change it to the cps
+os.system("CopasiSE.exe predator-prey.cps")#change it to the cps
 import csv
 csv_file = open('modelResults.csv', 'r') 
 csv_reader_lines = csv.reader(csv_file) 
@@ -131,13 +174,13 @@ plt.ylabel('population size')
 plt.title('time course')
 plt.legend()
  
-
 what plan to do later  
 --------------------------
+there is still some mistakes between assignment 3 and 4
 change the xml file into the cps
 plot the diagram 
-on the basis of the first plot 
-later can define a function, use global count to run 100 times, each time count=count+1,run the simulation
+write a for loop :e.g for k in range(0,100)
+
 """
 
 
