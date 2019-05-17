@@ -99,16 +99,23 @@ plt.plot(A,B)
 plt.title("cycle limit")
 
 #-------------------------------------------------------------
-#question exists here
-"""
+#question 3 still mistakes ExpatError: unclosed token: line 103, column 6
+import os
 import xml.dom.minidom
-DOMTree=xml.dom.minidom.parse('predator-prey.xml')
-collection=DOMTree.documentElement
+os.chdir('C:/Users/Jessi/OneDrive/桌面/IBI/IBI1_2018-19/Practical13')
+# first, convert xml to cps 
+os.system("CopasiSE.exe -i predator-prey-copy.xml -s predator-prey-copy.cps")   
+os.chdir('C:/Users/Jessi/OneDrive/桌面/IBI/IBI1_2018-19/Practical13')
+DOMTree=xml.dom.minidom.parse('predator-prey-copy.xml')
+collection=DOMTree.documentElement#rootelement
 parameters=collection.getElementsByTagName('parameter')
-#find and change parameters
+#find and change parameters value
 for parameter in parameters:
+    val=parameter.getAttributr('value')
     if parameter.getAttribute('id')=='k_predator_breeds':
        parameter.setAttribute('value','0.5')
+       print('k_predator_breeds')
+       print(parameter.attributes['value'].value)
     if parameter.getAttribute('id')=='k_predator_dies':
        parameter.setAttribute('value','0.4')
     if parameter.getAttribute('id')=='k_prey_breeds':
@@ -116,17 +123,17 @@ for parameter in parameters:
     if parameter.getAttribute('id')=='k_prey_dies':
        parameter.setAttribute('value','0.6')
 #rewrite xml
-f=open('predator-prey.xml','w')
+f=open('predator-prey-copy.xml','w')
 DOMTree.writexml(f)
 xml_to_cps()#change to cps
-
+day1=[]
+datelist1=[]
 csv_file = open('modelResults.csv', 'r')
 for one_line in csv_reader_lines:
     day.append(one_line)
-    print(day)
-datelist.append(day)
-results = np.array (datelist)
-Results = results.astype (np. float) 
+datelist.append(day1)
+results = np.array (datelist1)
+Results = results.astype (np. float) #use array to present the location
 plt.plot( Results[0,:],Results[1,:],label='Predator(b=0.5,d=0.4)')
 plt.plot(Results[0,:],Results[2,:],label='Prey(b=0.8,d=0.6)')
 plt.legend()
@@ -141,7 +148,14 @@ plt.xlabel('predator population')
 plt.ylabel('prey population')
 plt.title('Limit cycle')
 plt.show()
+
+
+
+
+
+
 #--------------------------------------------------
+#Problem  4
 import xml.dom.minidom
 DOMTree = xml.dom.minidom.parse("predator-prey.xml")
 # four parameter: k predator breeds, k predator dies, k prey breeds, k prey dies
@@ -150,7 +164,7 @@ parameters=major.getElementsByTagName('parameter')#nodelist of parameter
 import random
 for parameter in parameters:
     parameter.getAttribute('value')#get the attribute value
-   #create a float range in (0,1) for value
+   #create a float range in (0,1) for every value
     parameter.setAttribute('value',random.random())
 copy=open('predator-prey.xml','w')#there is still some problem with write xml part which needs to be changed
 DOMTree.writexml(copy)
@@ -173,13 +187,18 @@ plt.xlabel('time')
 plt.ylabel('population size')
 plt.title('time course')
 plt.legend()
- 
+""" 
 what plan to do later  
 --------------------------
-there is still some mistakes between assignment 3 and 4
-change the xml file into the cps
+there is still some mistakes between assignment 3 and 4 
+as error mistake shows there is no attribute value in the elements
+I need to check the parameters I collect
+When successfully change the xml file into the cps
 plot the diagram 
-write a for loop :e.g for k in range(0,100)
+in question 4 write a for loop :e.g for k in range(0,100)
+it should contain the plot and random.random function, to plot 100 diagrams
+the parameter configuration needs to be changed according to value choose
+we can use list to achieve that  
 
 """
 
