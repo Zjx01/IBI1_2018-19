@@ -71,7 +71,10 @@ for item in emails:
         
         
         
-    
+# if it has restriction message, it is because you need to verify on the Internet
+#as the the email sent is too much, out of the range
+#if you want, you change another account
+        #760549092@qq.com     Password: Zhao5210J
     
        
     
