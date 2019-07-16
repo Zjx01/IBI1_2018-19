@@ -45,6 +45,7 @@ mail_pass="abc123456" #口令
 sender = '3180111435@zju.edu.cn' 
 filex=open('body.txt','r')
 txt=filex.read()#to get the content
+filex.close()
 name=['Anna','Mary','Emma']
 i=0
 for item in emails:
